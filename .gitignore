@@ -1,0 +1,14 @@
+target
+.idea
+.classpath
+.project
+.log
+public
+**/*/node_modules
+**/*/dist
+**/*/.tmp
+**/*/.sass-cache
+**/*/bower_components
+
+
+/bin/

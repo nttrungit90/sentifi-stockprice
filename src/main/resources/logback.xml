@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+	<!-- Need appender to write to console -->
+	<appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+		<!-- Log message format -->
+		<encoder>
+			<pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n
+			</pattern>
+		</encoder>
+	</appender>
+	
+	<!-- Need appender to write to file -->
+
+	<appender name="FILE"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		
+		<file>${ISUZU_STORE}/logs/stockprice.log</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<FileNamePattern>${ISUZU_STORE}/logs/stockprice_%d{yyyy-MM-dd}.log</FileNamePattern>
+			<MaxHistory>30</MaxHistory>
+		</rollingPolicy>
+		<encoder>
+			<pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+		</encoder>
+	</appender>
+
+	 
+	 <logger name="com.sentifi" level="DEBUG" />
+    <logger name="org.springframework" level="WARN" />
+    <logger name="org.hibernate" level="WARN" />
+
+	<!-- Setting the root level of logging to INFO -->
+	<root level="INFO">
+		<appender-ref ref="FILE" />
+		<appender-ref ref="CONSOLE" />
+	</root>
+</configuration>

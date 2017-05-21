@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.ehcache.org/ehcache.xsd"
+         updateCheck="true" monitoring="autodetect" dynamicConfig="true">
+
+	<!--  I want to cache the Close Dates for the 100 Most Frequently Used ticker symbols 
+	so that I will reduce latency on User Story 
+	Key to cache will be: tickersymbol + startDate + endDate
+	see com.sentifi.stockprice.rest.controller.TickerSymbolController.getTickerSymbolClosePrice(String, String, String)
+	-->
+    <cache name="closePrices"
+           maxElementsInMemory="100"
+           overflowToDisk="false"
+           timeToLiveSeconds="3600" timeToIdleSeconds="0"
+           memoryStoreEvictionPolicy="LFU" transactionalMode="off">
+    </cache>
+</ehcache>
