@@ -1,6 +1,5 @@
 package com.sentifi.stockprice.rest.controller;
 
-import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -22,10 +21,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.test.context.web.WebAppConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
@@ -37,10 +34,8 @@ import com.sentifi.stockprice.vo.ClosePrice;
 import com.sentifi.stockprice.vo.TickerSymbolClosePrice;
 
 
-@RunWith(SpringRunner.class)
+@RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest(classes = StockPriceService.class)
-@WebAppConfiguration
-
 public class TickerSymbolControllerTest {
 
 private MockMvc mockMvc;
@@ -60,22 +55,22 @@ private MockMvc mockMvc;
 	@Before
 	public void setup() {
         this.mockMvc = MockMvcBuilders.webAppContextSetup(wac).build();
-
+        
 	}
 
 	@Test
 	public void verifyGetTickerSymbolClosePriceAllParametersSuccess() throws Exception {
 		//prepare test data
 		String tickerSymbol = "GE";
-		String startDate = "2016-02-13";
-		String endDate = "2016-02-15";
+		String startDate = "2017-02-13";
+		String endDate = "2017-02-15";
 		
 		TickerSymbolClosePrice tickerSymbolClosePrice = new TickerSymbolClosePrice();
 		tickerSymbolClosePrice.setTicker(tickerSymbol);
 		List<ClosePrice> closeDates  = Arrays.asList(
-				new ClosePrice("2016-02-13", 20.1), 
-				new ClosePrice("2016-02-14", 20.2),
-				new ClosePrice("2016-02-15", 20.3));
+				new ClosePrice("2017-02-13", 30.04), 
+				new ClosePrice("2017-02-14", 30.28),
+				new ClosePrice("2017-02-15", 30.35));
 		tickerSymbolClosePrice.setCloseDates(closeDates);
 		/*
 		Expected returned Json
@@ -95,24 +90,15 @@ private MockMvc mockMvc;
         when(tickerSymbolServiceMock.getTickerSymbolClosePrice(tickerSymbol, startDate, endDate)).thenReturn(tickerSymbolClosePrice);
  
         UriComponentsBuilder builder = UriComponentsBuilder.fromPath("/api/v2/");
-		builder.path(tickerSymbol + ".json/closePrice"); 
+		builder.path(tickerSymbol + "/closePrice"); 
 		builder.queryParam("startDate", startDate);
 		builder.queryParam("endDate", endDate);
 		URI uri = builder.build().encode().toUri();
 
-		MvcResult result = mockMvc.perform(MockMvcRequestBuilders.get(uri).accept(MediaType.APPLICATION_JSON)).andReturn();
-		
-		String s = result.getResponse().getContentAsString();
         mockMvc.perform(MockMvcRequestBuilders.get(uri).accept(MediaType.APPLICATION_JSON))
         		.andExpect(content().contentType(APPLICATION_JSON_UTF8))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$", hasSize(1)))
-                .andExpect(jsonPath("$.Prices.[0].Ticker", is(tickerSymbol)))
-                .andExpect(jsonPath("$[0].description", is("Lorem ipsum")))
-                .andExpect(jsonPath("$[0].title", is("Foo")))
-                .andExpect(jsonPath("$[1].id", is(2)))
-                .andExpect(jsonPath("$[1].description", is("Lorem ipsum")))
-                .andExpect(jsonPath("$[1].title", is("Bar")));
+                .andExpect(jsonPath("$.Prices.[0].Ticker", is(tickerSymbol)));
  
         verify(tickerSymbolServiceMock, times(1)).getTickerSymbolClosePrice(tickerSymbol, startDate, endDate);
         verifyNoMoreInteractions(tickerSymbolServiceMock);
