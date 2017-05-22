@@ -7,6 +7,12 @@ public class ClosePrice {
 	public ClosePrice() {
 		super();
 	}
+	
+	public ClosePrice(String date, Double close) {
+		super();
+		this.date = date;
+		this.close = close;
+	}
 
 	public String getDate() {
 		return date;
