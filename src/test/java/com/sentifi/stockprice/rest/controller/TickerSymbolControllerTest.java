@@ -111,10 +111,11 @@ private MockMvc mockMvc;
 	}
 	
 	
-	@Test
+	
 	/*
 	 * An invalid ticker symbol returns a easy to understand error and HTTP Code of 404
 	 */
+	@Test
 	public void verifyGetTickerSymbolClosePriceInvalidTickerSymbol() throws Exception {
 		/*
 		Expected returned Json
@@ -129,7 +130,7 @@ private MockMvc mockMvc;
 		
 		//prepare test data
 		String tickerSymbol = "invalidTickerSymbol";
-		String startDate = "2017-02-15";
+		String startDate = "2017-02-13";
 		String endDate = "2017-02-15";
 		StockPriceException stockPriceException = new StockPriceException(ErrorCode.QECx02);
 	
@@ -153,6 +154,45 @@ private MockMvc mockMvc;
         verifyNoMoreInteractions(tickerSymbolServiceMock);
 	}
 	
+	
+	
+	/*
+	 * An invalid ticker time range returns a easy to understand error and HTTP Code of 404
+	 */
+	@Test
+	public void verifyGetTickerSymbolClosePriceInvalidTimeRange() throws Exception {
+		/*
+		Expected returned Json
+		{
+		    "errors": {
+		        "startDate": ["startDate should not exceed endDate"]
+		    },
+		    "stockPriceError": {
+		        "code": "QESx04",
+		        "message": "You have submitted incorrect query parameters. Please check your API call syntax and try again."
+		    }
+		}
+		*/
+		
+		//prepare test data
+		String tickerSymbol = "invalidTickerSymbol";
+		String startDate = "2017-02-15";
+		String endDate = "2017-02-13";
+        
+		UriComponentsBuilder builder = UriComponentsBuilder.fromPath("/api/v2/");
+		builder.path(tickerSymbol + "/closePrice"); 
+		builder.queryParam("startDate", startDate);
+		builder.queryParam("endDate", endDate);
+		URI uri = builder.build().encode().toUri();
+
+		// execute test
+        mockMvc.perform(MockMvcRequestBuilders.get(uri).accept(MediaType.APPLICATION_JSON))
+        		.andExpect(content().contentType(APPLICATION_JSON_UTF8))
+                .andExpect(status().is(404))
+                .andExpect(jsonPath("$.stockPriceError.code", is("QESx04")));
+ 
+        verify(tickerSymbolServiceMock, times(0)).getTickerSymbolClosePrice(tickerSymbol, startDate, endDate);
+	}
 	// ############ End test cases for requirement 1 ######################
 	
 	@Test
