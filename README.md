@@ -13,7 +13,6 @@ Sentifi Stock Price Service is built on the most popular open source framework a
 Your system must have Java 8 and Maven installed.
 
 ### Run the Application
-##  How to run the Sentifi Stock Price Service application ##
 Download the project and open it and then go to the folder that contains the pom.xml file.
 Open CMD and run the project with the command:
 ```
