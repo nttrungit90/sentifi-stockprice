@@ -52,5 +52,5 @@ When the application is running, access this URL to view how to use APIs:
 * `http://localhost:8080/swagger-ui.html `
 
 ## Extra funtionalities ##
-* `Monitor the application and log to the console which methods are running more than 1 second sop that we can optimize it `
+* `Monitor the application and log to the console which methods are running more than 1 second so that we can optimize it `
 * `The application has been secured with Spring Security but is not enabled. Developer can contine to develop and complete it `
