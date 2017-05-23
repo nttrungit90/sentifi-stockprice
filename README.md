@@ -8,6 +8,16 @@ Sentifi Stock Price Service is built on the most popular open source framework a
 * `EhCache (to cache frequently used data)`
 * `Springfox Swagger 2 (for REST API documentation)`
 
+
+### Prerequisites
+Your system must have Java 8 and Maven installed.
+
+### Run the Application
 ##  How to run the Sentifi Stock Price Service application ##
-Firstly, your system must have Java 8 installed.
+Download the project and open it and then go to the folder that contains the pom.xml file.
+Open CMD and run the project with the command:
+```
+mvn spring-boot:run
+```
+
 
