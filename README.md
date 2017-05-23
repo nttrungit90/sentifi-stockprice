@@ -21,8 +21,10 @@ mvn spring-boot:run
 ### REST APIs
 Request a Close Price for a ticker symbol for a range of dates (start date and end date).
 * `localhost:8080/api/v2/GE/closePrice?startDate=2017-04-03&endDate2017-04-06 `
+
 Request the 200 day moving average price for a ticker symbol beginning with a start date.
 * `localhost:8080/api/v2/GE/200dma?startDate=2016-05-21 `
+
 Single request for the 200 day moving average price for a up to 1000 ticker symbols beginning with a start date.
 * `localhost:8080/api/v2/200dma?startDate=2017-06-01&tickerSysmbols=GE,FE,InvalidTicker `
 
