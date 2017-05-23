@@ -25,6 +25,10 @@ mvn spring-boot:run
 ```
 mvn clean install
 ```
+or this command to skip running test cases
+```
+mvn clean install -DskipTests
+```
 After building the application, there will be an stockPriceService.jar file in the target folder.
 You can run the stockPriceService.jar by using the command:
 ```
@@ -45,4 +49,6 @@ Single request for the 200 day moving average price for a up to 1000 ticker symb
 When the application is running, access this URL to view how to use APIs:
 * `http://localhost:8080/swagger-ui.html `
 
-
+### Extra funtionalities
+* `Monitor the application and log to the console which methods are running more than 1 second sop that we can optimize it `
+* `The application has been secured with Spring Security but is not enabled. Developer can contine to develop and complete it `
