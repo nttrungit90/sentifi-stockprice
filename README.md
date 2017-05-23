@@ -8,6 +8,7 @@ Sentifi Stock Price Service is built on the most popular open source framework a
 * `Spring Boot `
 * `Spring MVC`
 * `Spring Security`
+* `Spring AOP`
 * `EhCache (to cache frequently used data)`
 * `Springfox Swagger 2 (for REST API documentation)`
 
