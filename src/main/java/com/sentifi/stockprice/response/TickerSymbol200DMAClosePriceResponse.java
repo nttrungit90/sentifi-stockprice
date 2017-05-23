@@ -3,8 +3,11 @@ package com.sentifi.stockprice.response;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.sentifi.stockprice.vo.ClosePriceAvg;
 
+import io.swagger.annotations.ApiModelProperty;
+
 public class TickerSymbol200DMAClosePriceResponse {
 	
+	@ApiModelProperty(notes = "200 day moving average close price of a ticker symbol")
 	@JsonProperty("200dma")
 	private ClosePriceAvg closePrice200DMA;
 	

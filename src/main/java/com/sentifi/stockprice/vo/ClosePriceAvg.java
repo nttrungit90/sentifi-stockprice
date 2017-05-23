@@ -2,11 +2,15 @@ package com.sentifi.stockprice.vo;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import io.swagger.annotations.ApiModelProperty;
+
 public class ClosePriceAvg {
 	
+	@ApiModelProperty(notes = "Ticker symbol")
 	@JsonProperty("Ticker")
 	private String ticker;
 	
+	@ApiModelProperty(notes = "Average close price")
 	@JsonProperty("Avg")
 	private String avg;
 	

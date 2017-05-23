@@ -35,9 +35,17 @@ import com.sentifi.stockprice.util.StockPriceDateUtil;
 import com.sentifi.stockprice.vo.ClosePriceAvg;
 import com.sentifi.stockprice.vo.TickerSymbolClosePrice;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
+
 /**
  * Spring MVC controller for TickerSymbol management.
  */
+
+@Api(value="ticker symbol api", description = "Operations pertaining to ticker symbol")
 @RestController
 @RequestMapping("/api")
 public class TickerSymbolController {
@@ -130,12 +138,26 @@ public class TickerSymbolController {
 		
 	}
 	
+	
+	@ApiOperation(value = "Provide the 200 day moving average price for a up to 1000 ticker symbols beginning with a start date."
+			+ "An invalid ticker symbol generates a message in the JSON response that the ticker is invalid."
+			+ "If there is no data for a ticker symbol with the start date provided, data for the first possible start date is provided back to the client.", 
+			
+			
+			
+			response = TickerSymbol200DMAClosePriceListResponse.class)
+	@ApiResponses(value = {
+	        @ApiResponse(code = 200, message = "Successfully query for 200 day moving average price of ticker symbols"),
+	        @ApiResponse(code = 404, message = "In case start date is in valid format")
+		}
+	)
+	
 	@RequestMapping( value="/v2/200dma",
 			method = RequestMethod.GET,
 			produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.OK)
 	@ResponseBody
-	public ResponseEntity<?> getTickerSymbol200DMA(
+	public ResponseEntity<?> getMutipleTickerSymbol200DMA(
 			@RequestParam(name = "tickerSysmbols", required = true) List<String> tickerSysmbols,
 			@RequestParam(name = "startDate", required = true) String startDate) {
 		

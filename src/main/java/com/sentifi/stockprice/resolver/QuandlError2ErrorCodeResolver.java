@@ -10,7 +10,7 @@ public class QuandlError2ErrorCodeResolver {
 	
 	public static ErrorCode resolve(QuandlError quandlError) {
 		List<ErrorCode> errorCodes = Arrays.asList(ErrorCode.values());
-		// return defaul error code if no match error code found
+		// return default error code if no match error code found
 		ErrorCode retErrorCode = ErrorCode.QEXx03;
 		for(ErrorCode code : errorCodes) {
 			if(code.getCode().equalsIgnoreCase(quandlError.getCode())) {

@@ -3,10 +3,15 @@ package com.sentifi.stockprice.response;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.swagger.annotations.ApiModelProperty;
+
 public class TickerSymbol200DMAClosePriceListResponse {
+	
+	@ApiModelProperty(notes = "List of 200 days moving average close price of ticker symbols")
 	private List<TickerSymbol200DMAClosePriceResponse> tickerSymbols200dma = new ArrayList<TickerSymbol200DMAClosePriceResponse>();
+	
+	@ApiModelProperty(notes = "List of invalid ticker symbols")
 	private List<ErrorResponse> invalidTickers  = new ArrayList<ErrorResponse>();
-	private List<ErrorResponse> noDataFoundTickers  = new ArrayList<ErrorResponse>();
 	
 	public TickerSymbol200DMAClosePriceListResponse() {
 		super();
@@ -14,11 +19,10 @@ public class TickerSymbol200DMAClosePriceListResponse {
 	
 	
 	public TickerSymbol200DMAClosePriceListResponse(List<TickerSymbol200DMAClosePriceResponse> tickerSymbols200dma,
-			List<ErrorResponse> invalidTickers, List<ErrorResponse> noDataFoundTickers) {
+			List<ErrorResponse> invalidTickers) {
 		super();
 		this.tickerSymbols200dma = tickerSymbols200dma;
 		this.invalidTickers = invalidTickers;
-		this.noDataFoundTickers = noDataFoundTickers;
 	}
 
 
@@ -34,13 +38,4 @@ public class TickerSymbol200DMAClosePriceListResponse {
 	public void setInvalidTickers(List<ErrorResponse> invalidTickers) {
 		this.invalidTickers = invalidTickers;
 	}
-
-	public List<ErrorResponse> getNoDataFoundTickers() {
-		return noDataFoundTickers;
-	}
-
-	public void setNoDataFoundTickers(List<ErrorResponse> noDataFoundTickers) {
-		this.noDataFoundTickers = noDataFoundTickers;
-	}
-	
 }

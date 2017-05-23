@@ -57,7 +57,6 @@ public class TickerSymbolRestDataSource implements TickerSymbolDataSource{
 						QuandlError2ErrorCodeResolver.resolve(quandlErrorResponse.getQuandlError()), 
 						quandlErrorResponse.getErrors());
 				throw stockPriceException;
-				
 			} catch (StockPriceException stockPriceException) {
 				throw stockPriceException;
 			} catch (Exception convertException) {

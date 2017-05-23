@@ -1,8 +1,13 @@
 package com.sentifi.stockprice.response;
 
+import io.swagger.annotations.ApiModelProperty;
+
 public class StockPriceError {
 
+	@ApiModelProperty(notes = "Error code")
 	private String code;
+	
+	@ApiModelProperty(notes = "Error message corresponding to error code")
 	private String message;
 
 	public StockPriceError() {

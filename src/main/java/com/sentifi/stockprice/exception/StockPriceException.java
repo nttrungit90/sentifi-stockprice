@@ -1,5 +1,6 @@
 package com.sentifi.stockprice.exception;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -10,8 +11,6 @@ public class StockPriceException extends Exception {
 	private ErrorCode errorCode;
 	// to store error messages of request parameters
 	private Map<String, List<String>> errors = new HashMap<String, List<String>>();
-	
-	private Map<String, Object> valuableInfos = new HashMap<String, Object>();
 	
 	public StockPriceException(ErrorCode errorCode) {
         this.errorCode = errorCode;
@@ -49,17 +48,23 @@ public class StockPriceException extends Exception {
 	public void setErrors(Map<String, List<String>> errors) {
 		this.errors = errors;
 	}
-
-	public Map<String, Object> getValuableInfos() {
-		return valuableInfos;
-	}
-
-	public void setValuableInfos(Map<String, Object> valuableInfos) {
-		this.valuableInfos = valuableInfos;
+	
+	public void addErrors(String key, List<String> errors) {
+		if(this.errors.get(key) == null) {
+			this.errors.put(key, errors);
+		} else {
+			this.errors.get(key).addAll(errors);
+		}
 	}
 	
-	public void putValuableInfo(String key, Object value) {
-		valuableInfos.put(key, value);
+	public void addErrors(String key, String error) {
+		if(this.errors.get(key) == null) {
+			List<String> list =  new ArrayList<String>();
+			list.add(error);
+			this.errors.put(key, list);
+		} else {
+			this.errors.get(key).add(error);
+		}
 	}
 
 }
