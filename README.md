@@ -7,6 +7,7 @@ Those APIs will be consumed by a REST API Client which may be a Web UI, Mobile A
 Sentifi Stock Price Service is built on the most popular open source framework and technologies such as:
 * `Spring Boot `
 * `Spring MVC`
+* `Spring Security`
 * `EhCache (to cache frequently used data)`
 * `Springfox Swagger 2 (for REST API documentation)`
 
