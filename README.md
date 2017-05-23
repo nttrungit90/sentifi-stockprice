@@ -1,7 +1,9 @@
 ##  Sentifi Stock Price Service ##
 
 Stock Price Service provide REST APIs about stock price of ticker symbols.
+
 Those APIs will be consumed by a REST API Client which may be a Web UI, Mobile App, another Microservice or even a command line utility such as Curl.
+
 Sentifi Stock Price Service is built on the most popular open source framework and technologies such as:
 * `Spring Boot `
 * `Spring MVC`
@@ -18,6 +20,17 @@ Open CMD and run the application with the command:
 ```
 mvn spring-boot:run
 ```
+
+### Build the application code and run test cases
+```
+mvn clean install
+```
+After building the application, there will be an stockPriceService.jar file in the target folder.
+You can run the stockPriceService.jar by using the command:
+```
+java -jar stockPriceService.jar
+```
+
 ### REST APIs
 Request a Close Price for a ticker symbol for a range of dates (start date and end date).
 * `localhost:8080/api/v2/GE/closePrice?startDate=2017-04-03&endDate2017-04-06 `
@@ -28,5 +41,8 @@ Request the 200 day moving average price for a ticker symbol beginning with a st
 Single request for the 200 day moving average price for a up to 1000 ticker symbols beginning with a start date.
 * `localhost:8080/api/v2/200dma?startDate=2017-06-01&tickerSysmbols=GE,FE,InvalidTicker `
 
+### REST APIs Documentation
+When the application is running, access this URL to view how to use APIs:
+* `http://localhost:8080/swagger-ui.html `
 
 
